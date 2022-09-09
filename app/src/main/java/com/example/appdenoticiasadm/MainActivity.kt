@@ -40,13 +40,21 @@ class MainActivity : AppCompatActivity() {
       "autor" to autor,
     )
 
-    db.collection("noticias").document("noticia")
-      .set(mapNoticias).addOnCompleteListener { tarefa ->
-        if (tarefa.isSuccessful) {
+    db.collection("noticias").document((0..100).random().toString())
+      .set(mapNoticias).addOnCompleteListener { tariff ->
+        if (tariff.isSuccessful) {
           Toast.makeText(this, "Noticia Publicada com sucesso!", Toast.LENGTH_LONG).show()
+          limparCampos()
         } else {
           Toast.makeText(this, "Erro ao publicar noticia!", Toast.LENGTH_LONG).show()
         }
       }
+  }
+
+  private fun limparCampos(){
+    binding.tituloNoticia.setText("")
+    binding.noticia.setText("")
+    binding.dataPublicacao.setText("")
+    binding.autor.setText("")
   }
 }
